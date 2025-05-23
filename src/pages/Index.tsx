@@ -1,7 +1,9 @@
+
 import { useState, useEffect, useRef } from "react";
 import { ChevronDown, Phone, MapPin, Clock, Star, CheckCircle, Wrench, AlertTriangle, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 
 const Index = () => {
   const [activeAccordion, setActiveAccordion] = useState<number | null>(null);
@@ -328,55 +330,104 @@ const Index = () => {
 
       {/* Footer */}
       <footer className="bg-black text-white py-12 px-4">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8">
-          {/* Left Column */}
-          <div className="space-y-6">
-            <div className="flex items-center space-x-3">
-              <Wrench className="h-8 w-8 text-yellow-400" />
-              <span className="text-2xl font-bold text-yellow-400">Garage Experts Inc.</span>
+        <div className="max-w-6xl mx-auto">
+          {/* Top Footer Section */}
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-8 mb-10">
+            {/* Company Info */}
+            <div className="md:col-span-2 space-y-6">
+              <div className="flex items-center space-x-3">
+                <Wrench className="h-8 w-8 text-yellow-400" />
+                <span className="text-2xl font-bold text-yellow-400">Garage Experts Inc.</span>
+              </div>
+              <div>
+                <h3 className="text-lg font-bold text-white mb-2">Need urgent help? Call now</h3>
+                <Button 
+                  className="bg-yellow-400 text-black hover:bg-yellow-300 font-bold"
+                  onClick={() => window.open(`tel:${phoneNumber}`, '_self')}
+                >
+                  <Phone className="mr-2 h-4 w-4" />
+                  {phoneNumber}
+                </Button>
+              </div>
+              <p className="text-gray-400 max-w-xs">
+                Professional garage door repair and installation services available 24/7 for emergencies.
+              </p>
             </div>
-            <div>
-              <h3 className="text-lg font-bold text-white mb-2">Need urgent help? Call now</h3>
-              <Button 
-                className="bg-yellow-400 text-black hover:bg-yellow-300 font-bold"
-                onClick={() => window.open(`tel:${phoneNumber}`, '_self')}
-              >
-                <Phone className="mr-2 h-4 w-4" />
-                {phoneNumber}
-              </Button>
+            
+            {/* Service Regions */}
+            <div className="md:col-span-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+              <div>
+                <h4 className="font-bold text-yellow-400 mb-3">Northeast</h4>
+                <ul className="space-y-2">
+                  {regionGroups["Northeast"].map((city) => (
+                    <li key={city}>
+                      <button
+                        className="text-gray-400 hover:text-yellow-400 flex items-center transition-colors"
+                        onClick={scrollToServingAreas}
+                      >
+                        <ArrowRight className="h-3 w-3 mr-1" />
+                        {city.split("/")[0].trim()}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              
+              <div>
+                <h4 className="font-bold text-yellow-400 mb-3">Midwest & South</h4>
+                <ul className="space-y-2">
+                  {[...regionGroups["Midwest"], ...regionGroups["South"]].slice(0, 6).map((city) => (
+                    <li key={city}>
+                      <button
+                        className="text-gray-400 hover:text-yellow-400 flex items-center transition-colors"
+                        onClick={scrollToServingAreas}
+                      >
+                        <ArrowRight className="h-3 w-3 mr-1" />
+                        {city.split("/")[0].trim()}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              
+              <div>
+                <h4 className="font-bold text-yellow-400 mb-3">Southwest & West</h4>
+                <ul className="space-y-2">
+                  {[...regionGroups["Southwest"], ...regionGroups["West"]].slice(0, 6).map((city) => (
+                    <li key={city}>
+                      <button
+                        className="text-gray-400 hover:text-yellow-400 flex items-center transition-colors"
+                        onClick={scrollToServingAreas}
+                      >
+                        <ArrowRight className="h-3 w-3 mr-1" />
+                        {city.split("/")[0].trim()}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
           
-          {/* Right Column - Regions */}
-          <div>
-            <h3 className="text-lg font-bold text-white mb-4">Service Regions</h3>
-            <div className="grid grid-cols-2 gap-4">
-              {Object.entries(regionGroups).map(([region, cities]) => (
-                <div key={region}>
-                  <h4 className="font-bold text-yellow-400 mb-2">{region}</h4>
-                  <ul className="space-y-2">
-                    {cities.map((city) => (
-                      <li key={city}>
-                        <button
-                          className="text-gray-400 hover:text-yellow-400 flex items-center transition-colors"
-                          onClick={scrollToServingAreas}
-                        >
-                          <ArrowRight className="h-3 w-3 mr-1" />
-                          {city.split("/")[0].trim()}
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
+          <Separator className="bg-gray-800 my-6" />
+          
+          {/* Bottom Footer */}
+          <div className="flex flex-col md:flex-row items-center justify-between pt-4">
+            <p className="text-sm text-gray-500 mb-4 md:mb-0">
+              © 2025 Garage Experts Inc. All rights reserved.
+            </p>
+            <div className="flex space-x-6">
+              <button onClick={scrollToServingAreas} className="text-sm text-gray-500 hover:text-yellow-400 transition-colors">
+                Service Areas
+              </button>
+              <button onClick={() => window.open(`tel:${phoneNumber}`, '_self')} className="text-sm text-gray-500 hover:text-yellow-400 transition-colors">
+                Contact Us
+              </button>
+              <button onClick={() => window.scrollTo(0, 0)} className="text-sm text-gray-500 hover:text-yellow-400 transition-colors">
+                Back to Top
+              </button>
             </div>
           </div>
-        </div>
-        
-        <div className="max-w-6xl mx-auto mt-12 pt-6 border-t border-gray-800 text-center">
-          <p className="text-sm text-gray-500">
-            © 2025 Garage Experts Inc. All rights reserved.
-          </p>
         </div>
       </footer>
 
