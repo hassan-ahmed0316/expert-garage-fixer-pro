@@ -1,19 +1,36 @@
-import * as React from "react"
 
-const MOBILE_BREAKPOINT = 768
+import { useState, useEffect } from 'react';
 
-export function useIsMobile() {
-  const [isMobile, setIsMobile] = React.useState<boolean | undefined>(undefined)
+export function useMobile() {
+  const [windowSize, setWindowSize] = useState({
+    width: typeof window !== 'undefined' ? window.innerWidth : 0,
+    height: typeof window !== 'undefined' ? window.innerHeight : 0,
+  });
 
-  React.useEffect(() => {
-    const mql = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`)
-    const onChange = () => {
-      setIsMobile(window.innerWidth < MOBILE_BREAKPOINT)
+  useEffect(() => {
+    function handleResize() {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
     }
-    mql.addEventListener("change", onChange)
-    setIsMobile(window.innerWidth < MOBILE_BREAKPOINT)
-    return () => mql.removeEventListener("change", onChange)
-  }, [])
 
-  return !!isMobile
+    window.addEventListener('resize', handleResize);
+    handleResize(); // Initial call
+    
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Define breakpoints based on Tailwind's default breakpoints
+  const isMobile = windowSize.width < 640;  // sm
+  const isTablet = windowSize.width >= 640 && windowSize.width < 1024; // md-lg
+  const isDesktop = windowSize.width >= 1024;
+
+  return { 
+    isMobile, 
+    isTablet, 
+    isDesktop,
+    windowWidth: windowSize.width,
+    windowHeight: windowSize.height,
+  };
 }
