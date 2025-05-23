@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from "react";
 import { ChevronDown, Phone, MapPin, Clock, Star, CheckCircle, Wrench, AlertTriangle, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -328,7 +327,7 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-black text-gray-300 py-12 px-4">
+      <footer className="bg-black text-white py-12 px-4">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8">
           {/* Left Column */}
           <div className="space-y-6">
