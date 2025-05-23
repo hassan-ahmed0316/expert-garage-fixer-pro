@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from "react";
 import { ChevronDown, Phone, MapPin, Clock, Star, CheckCircle, Wrench, AlertTriangle, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -25,7 +24,11 @@ const Index = () => {
   };
 
   const toggleAccordion = (index: number) => {
-    setActiveAccordion(activeAccordion === index ? null : index);
+    if (activeAccordion === index) {
+      setActiveAccordion(null);
+    } else {
+      setActiveAccordion(index);
+    }
   };
 
   const phoneNumber = "(954) 539-6734";
@@ -126,14 +129,17 @@ const Index = () => {
       <header className="bg-black text-white py-3 px-4 sticky top-0 z-50">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between">
           <div className="flex items-center space-x-3 mb-3 sm:mb-0">
-            <Wrench className="h-6 w-6 sm:h-8 sm:w-8 text-yellow-400" />
-            <div>
-              <h1 className="text-xl sm:text-2xl font-bold text-yellow-400">Garage Experts Inc.</h1>
+            <div className="flex flex-col">
+              <h1 className="text-2xl sm:text-3xl font-bold">
+                <span className="text-yellow-400">Garage</span>
+                <span className="text-white">Experts</span>
+                <span className="text-gray-400 text-sm sm:text-base font-normal ml-1">Inc.</span>
+              </h1>
               <p className="text-xs sm:text-sm text-gray-300">Professional Garage Door Repair</p>
             </div>
           </div>
           <Button 
-            className="bg-yellow-400 text-black hover:bg-yellow-300 font-bold px-4 py-2 sm:px-6 sm:py-3 text-base sm:text-lg w-full sm:w-auto"
+            className="bg-yellow-400 text-black hover:bg-yellow-300 font-bold px-4 py-2 sm:px-6 sm:py-3 text-lg sm:text-xl w-full sm:w-auto"
             onClick={() => window.open(`tel:${phoneNumber}`, '_self')}
           >
             <Phone className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
@@ -169,7 +175,7 @@ const Index = () => {
 
           <Button 
             size="lg"
-            className="bg-yellow-400 text-black hover:bg-yellow-300 font-bold px-6 py-3 sm:px-8 sm:py-4 text-lg sm:text-xl w-full sm:w-auto"
+            className="bg-yellow-400 text-black hover:bg-yellow-300 font-bold px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-xl w-full sm:w-auto"
             onClick={() => window.open(`tel:${phoneNumber}`, '_self')}
           >
             <Phone className="mr-2 sm:mr-3 h-5 w-5 sm:h-6 sm:w-6" />
@@ -190,45 +196,44 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="grid gap-3 sm:gap-4">
+          <div className="grid gap-4">
             {garageIssues.map((issue, index) => (
-              <Card key={index} className="border-2 border-gray-200 hover:border-yellow-400 transition-all duration-300 shadow-sm hover:shadow-md">
+              <Card key={index} className="border-2 border-gray-900 hover:border-yellow-400 transition-all duration-300 shadow-sm">
                 <CardContent className="p-0">
                   <button
                     onClick={() => toggleAccordion(index)}
-                    className="w-full p-4 sm:p-6 text-left flex items-center justify-between hover:bg-gray-50 transition-colors"
+                    className="w-full p-3 sm:p-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors"
                   >
-                    <div className="flex items-center space-x-3 sm:space-x-4">
-                      {issue.urgency === 'high' && <AlertTriangle className="h-5 w-5 sm:h-6 sm:w-6 text-red-500 flex-shrink-0" />}
-                      {issue.urgency === 'medium' && <AlertTriangle className="h-5 w-5 sm:h-6 sm:w-6 text-yellow-500 flex-shrink-0" />}
-                      {issue.urgency === 'low' && <CheckCircle className="h-5 w-5 sm:h-6 sm:w-6 text-green-500 flex-shrink-0" />}
+                    <div className="flex items-center space-x-3">
+                      <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center font-bold bg-gray-900 text-white">
+                        {index + 1}
+                      </div>
                       <div>
-                        <h3 className="text-base sm:text-xl font-bold text-black">{issue.title}</h3>
-                        <p className="text-sm sm:text-base text-gray-600">{issue.problem}</p>
+                        <h3 className="text-base sm:text-lg font-bold text-gray-700">{issue.title}</h3>
+                        <p className="text-sm text-gray-600 line-clamp-2">{issue.problem}</p>
                       </div>
                     </div>
                     <ChevronDown 
-                      className={`h-5 w-5 sm:h-6 sm:w-6 text-yellow-400 transition-transform duration-300 flex-shrink-0 ${
+                      className={`h-5 w-5 sm:h-6 sm:w-6 text-gray-400 transition-transform duration-300 flex-shrink-0 ${
                         activeAccordion === index ? 'rotate-180' : ''
                       }`} 
                     />
                   </button>
                   
-                  {activeAccordion === index && (
-                    <div className="px-4 sm:px-6 pb-4 sm:pb-6 border-t bg-yellow-50">
-                      <div className="pt-3 sm:pt-4">
-                        <h4 className="font-bold text-black mb-2 sm:mb-3">How We Fix It:</h4>
-                        <p className="text-sm sm:text-base text-gray-700 leading-relaxed mb-3 sm:mb-4">{issue.solution}</p>
-                        <Button 
-                          className="bg-black text-yellow-400 hover:bg-gray-800 w-full sm:w-auto"
-                          onClick={() => window.open(`tel:${phoneNumber}`, '_self')}
-                        >
-                          <Phone className="mr-2 h-4 w-4" />
-                          Get This Fixed Today
-                        </Button>
+                  <div 
+                    className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                      activeAccordion === index 
+                        ? 'max-h-[1000px] opacity-100' 
+                        : 'max-h-0 opacity-0'
+                    }`}
+                  >
+                    <div className="px-3 sm:px-4 pb-3 sm:pb-4 border-t bg-yellow-50">
+                      <div className="pt-3">
+                        <h4 className="font-bold text-black mb-2 text-sm sm:text-base">How We Fix It:</h4>
+                        <p className="text-sm text-gray-700">{issue.solution}</p>
                       </div>
                     </div>
-                  )}
+                  </div>
                 </CardContent>
               </Card>
             ))}
@@ -237,7 +242,7 @@ const Index = () => {
       </section>
 
       {/* Why Choose Us - Now Responsive */}
-      <section className="py-10 sm:py-16 px-4 bg-gray-50">
+      <section className="py-10 sm:py-16 px-4 bg-white">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-2xl sm:text-4xl font-bold text-center text-black mb-8 sm:mb-12">
             Why Homeowners Choose Garage Experts Inc.
@@ -295,12 +300,175 @@ const Index = () => {
           <div className="text-center mt-8 sm:mt-12">
             <Button 
               size={isMobile ? "default" : "lg"}
-              className="bg-yellow-400 text-black hover:bg-yellow-300 font-bold px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-xl w-full sm:w-auto"
+              className="bg-yellow-400 text-black hover:bg-yellow-300 font-bold px-6 py-3 sm:px-8 sm:py-4 text-lg sm:text-2xl w-full sm:w-auto"
               onClick={() => window.open(`tel:${phoneNumber}`, '_self')}
             >
               <Phone className="mr-2 h-5 w-5 sm:h-6 sm:w-6" />
-              Talk to a Live Garage Technician
+              Call {phoneNumber} Now
             </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section className="py-10 sm:py-16 px-4 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-4xl font-bold text-black mb-2 sm:mb-4">
+              Expert Solutions for Every Garage Door Problem
+            </h2>
+            <p className="text-lg sm:text-xl text-gray-600">
+              Click on your issue below to learn more about our professional solutions
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {[
+              {
+                title: "Broken Spring Repair",
+                description: "Torsion and extension spring repairs with safety-first approach",
+                causes: "Age, wear and tear, improper maintenance, extreme temperatures",
+                risks: "Door collapse, property damage, safety hazards",
+                diyMistakes: "Attempting spring replacement without proper tools, incorrect spring sizing",
+                signs: "Loud bang, door won't open, uneven movement, visible spring damage"
+              },
+              {
+                title: "Opener Repair & Installation",
+                description: "Complete opener solutions for all major brands",
+                causes: "Motor failure, gear wear, electrical issues, programming problems",
+                risks: "Security vulnerability, inconvenience, potential door damage",
+                diyMistakes: "Incorrect wiring, improper mounting, wrong model selection",
+                signs: "No response to remote, unusual noises, partial operation"
+              },
+              {
+                title: "Door Off Track Repair",
+                description: "Professional track realignment and hardware repair",
+                causes: "Impact damage, worn rollers, broken cables, improper installation",
+                risks: "Complete door failure, property damage, safety concerns",
+                diyMistakes: "Forcing door movement, improper track adjustment",
+                signs: "Crooked door, grinding noises, jerky movement"
+              },
+              {
+                title: "Broken Cable Repair",
+                description: "High-strength cable replacement and adjustment",
+                causes: "Cable fraying, improper tension, worn pulleys",
+                risks: "Door imbalance, spring damage, safety hazards",
+                diyMistakes: "Incorrect cable routing, improper tensioning",
+                signs: "Visible cable damage, uneven door movement"
+              },
+              {
+                title: "Garage Door Roller Repair",
+                description: "Premium roller replacement and track maintenance",
+                causes: "Worn bearings, lack of lubrication, track misalignment",
+                risks: "Increased wear, noisy operation, door damage",
+                diyMistakes: "Using wrong roller type, improper installation",
+                signs: "Squeaking, grinding, jerky movement"
+              },
+              {
+                title: "Garage Door Maintenance & Tune-Up",
+                description: "Comprehensive maintenance for optimal performance",
+                causes: "Lack of regular maintenance, environmental factors",
+                risks: "Premature wear, unexpected failures, safety issues",
+                diyMistakes: "Incorrect lubrication, missed components",
+                signs: "Noisy operation, slow movement, general wear"
+              },
+              {
+                title: "Remote Repair & Programming",
+                description: "Complete remote control solutions and programming",
+                causes: "Battery failure, signal interference, programming issues",
+                risks: "Security concerns, convenience issues",
+                diyMistakes: "Incorrect programming sequence, wrong frequency",
+                signs: "Intermittent operation, no response, range issues"
+              },
+              {
+                title: "Garage Door Panel Repair",
+                description: "Expert panel replacement and dent repair",
+                causes: "Impact damage, weather damage, age-related wear",
+                risks: "Security issues, weather damage, aesthetic problems",
+                diyMistakes: "Improper panel alignment, wrong panel selection",
+                signs: "Visible damage, water leaks, poor insulation"
+              },
+              {
+                title: "New Garage Door Installation",
+                description: "Complete door system installation and setup",
+                causes: "Old age, severe damage, upgrade needs",
+                risks: "Security vulnerabilities, energy loss, safety issues",
+                diyMistakes: "Incorrect sizing, improper installation",
+                signs: "Multiple repairs needed, poor performance"
+              }
+            ].map((service, index) => (
+              <Card 
+                key={index} 
+                className={`border-2 transition-all duration-300 shadow-sm ${
+                  activeAccordion === index 
+                    ? 'border-yellow-400 bg-yellow-50 shadow-md' 
+                    : 'border-gray-900 hover:border-yellow-400'
+                }`}
+              >
+                <CardContent className="p-0">
+                  <button
+                    onClick={() => toggleAccordion(index)}
+                    className={`w-full p-3 sm:p-4 text-left flex items-center justify-between transition-colors ${
+                      activeAccordion === index 
+                        ? 'bg-yellow-50' 
+                        : 'hover:bg-gray-50'
+                    }`}
+                  >
+                    <div className="flex items-center space-x-3">
+                      <div className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center font-bold transition-colors ${
+                        activeAccordion === index 
+                          ? 'bg-black text-yellow-400' 
+                          : 'bg-gray-900 text-white'
+                      }`}>
+                        {index + 1}
+                      </div>
+                      <div>
+                        <h3 className={`text-base sm:text-lg font-bold transition-colors ${
+                          activeAccordion === index ? 'text-black' : 'text-gray-700'
+                        }`}>{service.title}</h3>
+                        <p className="text-sm text-gray-600 line-clamp-2">{service.description}</p>
+                      </div>
+                    </div>
+                    <ChevronDown 
+                      className={`h-5 w-5 sm:h-6 sm:w-6 transition-transform duration-300 flex-shrink-0 ${
+                        activeAccordion === index 
+                          ? 'rotate-180 text-yellow-400' 
+                          : 'text-gray-400'
+                      }`} 
+                    />
+                  </button>
+                  
+                  <div 
+                    className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                      activeAccordion === index 
+                        ? 'max-h-[1000px] opacity-100' 
+                        : 'max-h-0 opacity-0'
+                    }`}
+                  >
+                    <div className="px-3 sm:px-4 pb-3 sm:pb-4 border-t bg-yellow-50">
+                      <div className="pt-3 space-y-3">
+                        <div>
+                          <h4 className="font-bold text-black mb-1 text-sm sm:text-base">Common Causes:</h4>
+                          <p className="text-gray-700 text-sm">{service.causes}</p>
+                        </div>
+                        <div>
+                          <h4 className="font-bold text-black mb-1 text-sm sm:text-base">Risks of Delaying:</h4>
+                          <p className="text-gray-700 text-sm">{service.risks}</p>
+                        </div>
+                        <div>
+                          <h4 className="font-bold text-black mb-1 text-sm sm:text-base">DIY Mistakes to Avoid:</h4>
+                          <p className="text-gray-700 text-sm">{service.diyMistakes}</p>
+                        </div>
+                        <div>
+                          <h4 className="font-bold text-black mb-1 text-sm sm:text-base">Signs You Need Help:</h4>
+                          <p className="text-gray-700 text-sm">{service.signs}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
@@ -330,117 +498,241 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Testimonials Section */}
+      <section className="py-10 sm:py-16 px-4 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-4xl font-bold text-black mb-2 sm:mb-4">
+              What Our Customers Say
+            </h2>
+            <p className="text-lg sm:text-xl text-gray-600">
+              Real experiences from homeowners we've helped
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            {/* Testimonial 1 */}
+            <Card className="border-2 border-gray-200 hover:border-yellow-400 transition-all duration-300 shadow-sm hover:shadow-md">
+              <CardContent className="p-6">
+                <div className="flex items-center mb-4">
+                  <div className="flex text-yellow-400">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="h-5 w-5 fill-current" />
+                    ))}
+                  </div>
+                </div>
+                <p className="text-gray-700 mb-4 italic">
+                  "Incredible service! My garage door was stuck and they had it fixed in under an hour. The technician was professional and explained everything clearly. Highly recommend!"
+                </p>
+                <div className="flex items-center">
+                  <div className="w-10 h-10 bg-yellow-400 rounded-full flex items-center justify-center text-black font-bold">
+                    JS
+                  </div>
+                  <div className="ml-3">
+                    <p className="font-semibold text-black">John Smith</p>
+                    <p className="text-sm text-gray-600">Miami, FL</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Testimonial 2 */}
+            <Card className="border-2 border-gray-200 hover:border-yellow-400 transition-all duration-300 shadow-sm hover:shadow-md">
+              <CardContent className="p-6">
+                <div className="flex items-center mb-4">
+                  <div className="flex text-yellow-400">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="h-5 w-5 fill-current" />
+                    ))}
+                  </div>
+                </div>
+                <p className="text-gray-700 mb-4 italic">
+                  "Emergency service at 2 AM! My garage door wouldn't close and they were here within 30 minutes. Fixed the issue and even cleaned up after themselves. Outstanding!"
+                </p>
+                <div className="flex items-center">
+                  <div className="w-10 h-10 bg-yellow-400 rounded-full flex items-center justify-center text-black font-bold">
+                    ML
+                  </div>
+                  <div className="ml-3">
+                    <p className="font-semibold text-black">Maria Lopez</p>
+                    <p className="text-sm text-gray-600">Chicago, IL</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Testimonial 3 */}
+            <Card className="border-2 border-gray-200 hover:border-yellow-400 transition-all duration-300 shadow-sm hover:shadow-md">
+              <CardContent className="p-6">
+                <div className="flex items-center mb-4">
+                  <div className="flex text-yellow-400">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="h-5 w-5 fill-current" />
+                    ))}
+                  </div>
+                </div>
+                <p className="text-gray-700 mb-4 italic">
+                  "They replaced my old garage door opener with a new smart system. The installation was clean and professional. Now I can control my garage from my phone!"
+                </p>
+                <div className="flex items-center">
+                  <div className="w-10 h-10 bg-yellow-400 rounded-full flex items-center justify-center text-black font-bold">
+                    RT
+                  </div>
+                  <div className="ml-3">
+                    <p className="font-semibold text-black">Robert Taylor</p>
+                    <p className="text-sm text-gray-600">Dallas, TX</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="text-center mt-8 sm:mt-12">
+            <p className="text-lg sm:text-xl text-gray-700 font-bold">
+              Join thousands of satisfied customers who trust us with their garage door repairs
+            </p>
+            <p className="text-base sm:text-lg text-gray-800 mt-2">
+              4.9/5 average rating from over 10,000+ completed service calls
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Footer - Now Responsive with 5 columns on large screens */}
       <footer className="bg-black text-white py-8 sm:py-12 px-4">
         <div className="max-w-6xl mx-auto">
           {/* Top Footer Section */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 sm:gap-8 mb-8 sm:mb-10">
-            {/* Company Info */}
-            <div className="space-y-4 sm:space-y-6 col-span-1 sm:col-span-2 md:col-span-1">
-              <div className="flex items-center space-x-2 sm:space-x-3">
-                <Wrench className="h-6 w-6 sm:h-8 sm:w-8 text-yellow-400" />
-                <span className="text-lg sm:text-2xl font-bold text-yellow-400">Garage Experts Inc.</span>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8 sm:mb-10">
+            {/* Contact Information */}
+            <div className="space-y-6">
+              <div className="flex flex-col">
+                <h2 className="text-2xl sm:text-3xl font-bold">
+                  <span className="text-yellow-400">Garage</span>
+                  <span className="text-white">Experts</span>
+                  <span className="text-gray-400 text-sm sm:text-base font-normal ml-1">Inc.</span>
+                </h2>
+                <p className="text-sm text-gray-400 mt-1">Professional Garage Door Repair</p>
               </div>
-              <div>
-                <h3 className="text-base sm:text-lg font-bold text-white mb-2">Need urgent help? Call now</h3>
-                <Button 
-                  className="bg-yellow-400 text-black hover:bg-yellow-300 font-bold w-full sm:w-auto"
-                  onClick={() => window.open(`tel:${phoneNumber}`, '_self')}
-                >
-                  <Phone className="mr-2 h-4 w-4" />
-                  {phoneNumber}
-                </Button>
+              <div className="space-y-4">
+                <div className="flex items-center space-x-2 text-gray-300">
+                  <Phone className="h-5 w-5 text-yellow-400" />
+                  <button 
+                    onClick={() => window.open(`tel:${phoneNumber}`, '_self')}
+                    className="text-lg hover:text-yellow-400 transition-colors"
+                  >
+                    {phoneNumber}
+                  </button>
+                </div>
+                <div className="flex items-center space-x-2 text-gray-300">
+                  <Clock className="h-5 w-5 text-yellow-400" />
+                  <span className="text-lg">24/7 Emergency Service</span>
+                </div>
+                <div className="flex items-center space-x-2 text-gray-300">
+                  <MapPin className="h-5 w-5 text-yellow-400" />
+                  <span className="text-lg">Serving Major US Locations</span>
+                </div>
               </div>
-              <p className="text-sm text-gray-400">
-                Professional garage door repair services available 24/7 for emergencies.
-              </p>
             </div>
-            
-            {/* Service Regions - Now 4 Columns */}
-            <div className="col-span-1">
-              <h4 className="font-bold text-yellow-400 mb-3">Northeast</h4>
-              <ul className="space-y-2">
-                {regionGroups["Northeast"].map((city) => (
-                  <li key={city}>
-                    <button
-                      className="text-xs sm:text-sm text-gray-400 hover:text-yellow-400 flex items-center transition-colors"
-                      onClick={scrollToServingAreas}
-                    >
-                      <ArrowRight className="h-2 w-2 sm:h-3 sm:w-3 mr-1" />
-                      {city.split("/")[0].trim()}
-                    </button>
-                  </li>
-                ))}
+
+            {/* Our Services */}
+            <div className="space-y-6">
+              <h4 className="text-xl font-bold text-yellow-400">Our Services</h4>
+              <ul className="space-y-3">
+                <li>
+                  <button className="text-gray-300 hover:text-yellow-400 transition-colors flex items-center group">
+                    <ArrowRight className="h-4 w-4 mr-2 transform group-hover:translate-x-1 transition-transform" />
+                    Broken Spring Repair
+                  </button>
+                </li>
+                <li>
+                  <button className="text-gray-300 hover:text-yellow-400 transition-colors flex items-center group">
+                    <ArrowRight className="h-4 w-4 mr-2 transform group-hover:translate-x-1 transition-transform" />
+                    Opener Repair & Installation
+                  </button>
+                </li>
+                <li>
+                  <button className="text-gray-300 hover:text-yellow-400 transition-colors flex items-center group">
+                    <ArrowRight className="h-4 w-4 mr-2 transform group-hover:translate-x-1 transition-transform" />
+                    Door Off Track Repair
+                  </button>
+                </li>
+                <li>
+                  <button className="text-gray-300 hover:text-yellow-400 transition-colors flex items-center group">
+                    <ArrowRight className="h-4 w-4 mr-2 transform group-hover:translate-x-1 transition-transform" />
+                    Broken Cable Repair
+                  </button>
+                </li>
+                <li>
+                  <button className="text-gray-300 hover:text-yellow-400 transition-colors flex items-center group">
+                    <ArrowRight className="h-4 w-4 mr-2 transform group-hover:translate-x-1 transition-transform" />
+                    New Garage Door Installation
+                  </button>
+                </li>
               </ul>
             </div>
-            
-            <div className="col-span-1">
-              <h4 className="font-bold text-yellow-400 mb-3">Mid-Atlantic & Midwest</h4>
-              <ul className="space-y-2">
-                {[...regionGroups["Mid-Atlantic"], ...regionGroups["Midwest"].slice(0, 4)].map((city) => (
-                  <li key={city}>
-                    <button
-                      className="text-xs sm:text-sm text-gray-400 hover:text-yellow-400 flex items-center transition-colors"
-                      onClick={scrollToServingAreas}
-                    >
-                      <ArrowRight className="h-2 w-2 sm:h-3 sm:w-3 mr-1" />
-                      {city.split("/")[0].trim()}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            
-            <div className="col-span-1">
-              <h4 className="font-bold text-yellow-400 mb-3">South</h4>
-              <ul className="space-y-2">
-                {regionGroups["South"].map((city) => (
-                  <li key={city}>
-                    <button
-                      className="text-xs sm:text-sm text-gray-400 hover:text-yellow-400 flex items-center transition-colors"
-                      onClick={scrollToServingAreas}
-                    >
-                      <ArrowRight className="h-2 w-2 sm:h-3 sm:w-3 mr-1" />
-                      {city.split("/")[0].trim()}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            
-            <div className="col-span-1">
-              <h4 className="font-bold text-yellow-400 mb-3">Southwest & West</h4>
-              <ul className="space-y-2">
-                {[...regionGroups["Southwest"], ...regionGroups["West"].slice(0, 4)].map((city) => (
-                  <li key={city}>
-                    <button
-                      className="text-xs sm:text-sm text-gray-400 hover:text-yellow-400 flex items-center transition-colors"
-                      onClick={scrollToServingAreas}
-                    >
-                      <ArrowRight className="h-2 w-2 sm:h-3 sm:w-3 mr-1" />
-                      {city.split("/")[0].trim()}
-                    </button>
-                  </li>
-                ))}
-              </ul>
+
+            {/* Service Areas */}
+            <div className="space-y-6">
+              <h4 className="text-xl font-bold text-yellow-400">Service Areas</h4>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <h5 className="text-sm font-semibold text-gray-400 mb-2">Northeast</h5>
+                  <ul className="space-y-2">
+                    {regionGroups["Northeast"].map((city) => (
+                      <li key={city}>
+                        <button
+                          className="text-sm text-gray-400 hover:text-yellow-400 transition-colors"
+                          onClick={scrollToServingAreas}
+                        >
+                          {city.split("/")[0].trim()}
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <h5 className="text-sm font-semibold text-gray-400 mb-2">South</h5>
+                  <ul className="space-y-2">
+                    {regionGroups["South"].map((city) => (
+                      <li key={city}>
+                        <button
+                          className="text-sm text-gray-400 hover:text-yellow-400 transition-colors"
+                          onClick={scrollToServingAreas}
+                        >
+                          {city.split("/")[0].trim()}
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+              <Button 
+                className="bg-yellow-400 text-black hover:bg-yellow-300 font-bold w-full mt-4"
+                onClick={scrollToServingAreas}
+              >
+                View All Service Areas
+              </Button>
             </div>
           </div>
           
           <Separator className="bg-gray-800 my-6" />
           
           {/* Bottom Footer - Now Responsive */}
-          <div className="flex flex-col sm:flex-row items-center justify-between pt-3 sm:pt-4">
-            <p className="text-xs sm:text-sm text-gray-500 mb-4 sm:mb-0">
+          <div className="flex flex-col sm:flex-row items-center justify-between pt-4">
+            <p className="text-sm text-gray-500 mb-4 sm:mb-0">
               © 2025 Garage Experts Inc. All rights reserved.
             </p>
-            <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
-              <button onClick={scrollToServingAreas} className="text-xs sm:text-sm text-gray-500 hover:text-yellow-400 transition-colors">
+            <div className="flex flex-wrap justify-center gap-6">
+              <button onClick={scrollToServingAreas} className="text-sm text-gray-500 hover:text-yellow-400 transition-colors">
                 Service Areas
               </button>
-              <button onClick={() => window.open(`tel:${phoneNumber}`, '_self')} className="text-xs sm:text-sm text-gray-500 hover:text-yellow-400 transition-colors">
+              <button 
+                onClick={() => window.open(`tel:${phoneNumber}`, '_self')} 
+                className="text-sm text-gray-500 hover:text-yellow-400 transition-colors"
+              >
                 Contact Us
               </button>
-              <button onClick={() => window.scrollTo(0, 0)} className="text-xs sm:text-sm text-gray-500 hover:text-yellow-400 transition-colors">
+              <button onClick={() => window.scrollTo(0, 0)} className="text-sm text-gray-500 hover:text-yellow-400 transition-colors">
                 Back to Top
               </button>
             </div>
@@ -456,7 +748,7 @@ const Index = () => {
             className="bg-yellow-400 text-black hover:bg-yellow-300 font-bold px-4 sm:px-6 py-3 sm:py-4 rounded-full shadow-lg animate-pulse"
             onClick={() => window.open(`tel:${phoneNumber}`, '_self')}
           >
-            <Phone className="mr-2 h-5 w-5 sm:h-6 sm:w-6" />
+            <Phone className="mr-[1px] h-5 w-5 sm:h-6 sm:w-6" />
             Call Now
           </Button>
         </div>
