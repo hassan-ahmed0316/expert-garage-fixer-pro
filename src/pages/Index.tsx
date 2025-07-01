@@ -130,10 +130,9 @@ const Index = () => {
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between">
           <div className="flex items-center space-x-3 mb-3 sm:mb-0">
             <div className="flex flex-col">
-              <h1 className="text-2xl sm:text-3xl font-bold">
-                <span className="text-yellow-400">Garage</span>
-                <span className="text-white">Experts</span>
-                <span className="text-gray-400 text-sm sm:text-base font-normal ml-1">Inc.</span>
+              <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
+                <span className="text-yellow-400">BOB</span>
+                <span className="text-white ml-1">HANDYMAN</span>
               </h1>
               <p className="text-xs sm:text-sm text-gray-300">Professional Garage Door Repair</p>
             </div>
@@ -276,203 +275,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Service Areas - Now Responsive */}
-      <section ref={servingAreasRef} className="py-10 sm:py-16 px-4 bg-black text-white" id="service-areas">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-8 sm:mb-12">
-            <h2 className="text-2xl sm:text-4xl font-bold mb-2 sm:mb-4">
-              <span className="text-yellow-400">🧭</span> Now Serving These Major Metro Areas
-            </h2>
-            <p className="text-base sm:text-xl text-gray-300">Fast Dispatch Available in 30+ Major Metro Areas</p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-            {metroAreas.map((area, index) => (
-              <div key={index} className="bg-gray-900 p-3 sm:p-4 rounded-lg border border-yellow-400 hover:bg-gray-800 transition-all">
-                <div className="flex items-center space-x-2 sm:space-x-3">
-                  <MapPin className="h-4 w-4 sm:h-5 sm:w-5 text-yellow-400 flex-shrink-0" />
-                  <span className="text-sm sm:text-base text-white font-medium">{area}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="text-center mt-8 sm:mt-12">
-            <Button 
-              size={isMobile ? "default" : "lg"}
-              className="bg-yellow-400 text-black hover:bg-yellow-300 font-bold px-6 py-3 sm:px-8 sm:py-4 text-lg sm:text-2xl w-full sm:w-auto"
-              onClick={() => window.open(`tel:${phoneNumber}`, '_self')}
-            >
-              <Phone className="mr-2 h-5 w-5 sm:h-6 sm:w-6" />
-              Call {phoneNumber} Now
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* Services Section */}
-      <section className="py-10 sm:py-16 px-4 bg-white">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-8 sm:mb-12">
-            <h2 className="text-2xl sm:text-4xl font-bold text-black mb-2 sm:mb-4">
-              Expert Solutions for Every Garage Door Problem
-            </h2>
-            <p className="text-lg sm:text-xl text-gray-600">
-              Click on your issue below to learn more about our professional solutions
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {[
-              {
-                title: "Broken Spring Repair",
-                description: "Torsion and extension spring repairs with safety-first approach",
-                causes: "Age, wear and tear, improper maintenance, extreme temperatures",
-                risks: "Door collapse, property damage, safety hazards",
-                diyMistakes: "Attempting spring replacement without proper tools, incorrect spring sizing",
-                signs: "Loud bang, door won't open, uneven movement, visible spring damage"
-              },
-              {
-                title: "Opener Repair & Installation",
-                description: "Complete opener solutions for all major brands",
-                causes: "Motor failure, gear wear, electrical issues, programming problems",
-                risks: "Security vulnerability, inconvenience, potential door damage",
-                diyMistakes: "Incorrect wiring, improper mounting, wrong model selection",
-                signs: "No response to remote, unusual noises, partial operation"
-              },
-              {
-                title: "Door Off Track Repair",
-                description: "Professional track realignment and hardware repair",
-                causes: "Impact damage, worn rollers, broken cables, improper installation",
-                risks: "Complete door failure, property damage, safety concerns",
-                diyMistakes: "Forcing door movement, improper track adjustment",
-                signs: "Crooked door, grinding noises, jerky movement"
-              },
-              {
-                title: "Broken Cable Repair",
-                description: "High-strength cable replacement and adjustment",
-                causes: "Cable fraying, improper tension, worn pulleys",
-                risks: "Door imbalance, spring damage, safety hazards",
-                diyMistakes: "Incorrect cable routing, improper tensioning",
-                signs: "Visible cable damage, uneven door movement"
-              },
-              {
-                title: "Garage Door Roller Repair",
-                description: "Premium roller replacement and track maintenance",
-                causes: "Worn bearings, lack of lubrication, track misalignment",
-                risks: "Increased wear, noisy operation, door damage",
-                diyMistakes: "Using wrong roller type, improper installation",
-                signs: "Squeaking, grinding, jerky movement"
-              },
-              {
-                title: "Garage Door Maintenance & Tune-Up",
-                description: "Comprehensive maintenance for optimal performance",
-                causes: "Lack of regular maintenance, environmental factors",
-                risks: "Premature wear, unexpected failures, safety issues",
-                diyMistakes: "Incorrect lubrication, missed components",
-                signs: "Noisy operation, slow movement, general wear"
-              },
-              {
-                title: "Remote Repair & Programming",
-                description: "Complete remote control solutions and programming",
-                causes: "Battery failure, signal interference, programming issues",
-                risks: "Security concerns, convenience issues",
-                diyMistakes: "Incorrect programming sequence, wrong frequency",
-                signs: "Intermittent operation, no response, range issues"
-              },
-              {
-                title: "Garage Door Panel Repair",
-                description: "Expert panel replacement and dent repair",
-                causes: "Impact damage, weather damage, age-related wear",
-                risks: "Security issues, weather damage, aesthetic problems",
-                diyMistakes: "Improper panel alignment, wrong panel selection",
-                signs: "Visible damage, water leaks, poor insulation"
-              },
-              {
-                title: "New Garage Door Installation",
-                description: "Complete door system installation and setup",
-                causes: "Old age, severe damage, upgrade needs",
-                risks: "Security vulnerabilities, energy loss, safety issues",
-                diyMistakes: "Incorrect sizing, improper installation",
-                signs: "Multiple repairs needed, poor performance"
-              }
-            ].map((service, index) => (
-              <Card 
-                key={index} 
-                className={`border-2 transition-all duration-300 shadow-sm ${
-                  activeAccordion === index 
-                    ? 'border-yellow-400 bg-yellow-50 shadow-md' 
-                    : 'border-gray-900 hover:border-yellow-400'
-                }`}
-              >
-                <CardContent className="p-0">
-                  <button
-                    onClick={() => toggleAccordion(index)}
-                    className={`w-full p-3 sm:p-4 text-left flex items-center justify-between transition-colors ${
-                      activeAccordion === index 
-                        ? 'bg-yellow-50' 
-                        : 'hover:bg-gray-50'
-                    }`}
-                  >
-                    <div className="flex items-center space-x-3">
-                      <div className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center font-bold transition-colors ${
-                        activeAccordion === index 
-                          ? 'bg-black text-yellow-400' 
-                          : 'bg-gray-900 text-white'
-                      }`}>
-                        {index + 1}
-                      </div>
-                      <div>
-                        <h3 className={`text-base sm:text-lg font-bold transition-colors ${
-                          activeAccordion === index ? 'text-black' : 'text-gray-700'
-                        }`}>{service.title}</h3>
-                        <p className="text-sm text-gray-600 line-clamp-2">{service.description}</p>
-                      </div>
-                    </div>
-                    <ChevronDown 
-                      className={`h-5 w-5 sm:h-6 sm:w-6 transition-transform duration-300 flex-shrink-0 ${
-                        activeAccordion === index 
-                          ? 'rotate-180 text-yellow-400' 
-                          : 'text-gray-400'
-                      }`} 
-                    />
-                  </button>
-                  
-                  <div 
-                    className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                      activeAccordion === index 
-                        ? 'max-h-[1000px] opacity-100' 
-                        : 'max-h-0 opacity-0'
-                    }`}
-                  >
-                    <div className="px-3 sm:px-4 pb-3 sm:pb-4 border-t bg-yellow-50">
-                      <div className="pt-3 space-y-3">
-                        <div>
-                          <h4 className="font-bold text-black mb-1 text-sm sm:text-base">Common Causes:</h4>
-                          <p className="text-gray-700 text-sm">{service.causes}</p>
-                        </div>
-                        <div>
-                          <h4 className="font-bold text-black mb-1 text-sm sm:text-base">Risks of Delaying:</h4>
-                          <p className="text-gray-700 text-sm">{service.risks}</p>
-                        </div>
-                        <div>
-                          <h4 className="font-bold text-black mb-1 text-sm sm:text-base">DIY Mistakes to Avoid:</h4>
-                          <p className="text-gray-700 text-sm">{service.diyMistakes}</p>
-                        </div>
-                        <div>
-                          <h4 className="font-bold text-black mb-1 text-sm sm:text-base">Signs You Need Help:</h4>
-                          <p className="text-gray-700 text-sm">{service.signs}</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Final CTA - Now Responsive */}
       <section className="py-10 sm:py-16 px-4 bg-gradient-to-r from-black to-gray-900 text-white">
         <div className="max-w-4xl mx-auto text-center">
@@ -480,7 +282,7 @@ const Index = () => {
             Don't Let a Broken Garage Door Ruin Your Day
           </h2>
           <p className="text-base sm:text-xl mb-6 sm:mb-8 text-gray-300">
-            Our experienced technicians are standing by to help. Real people, real solutions, real fast.
+            Call us directly for professional and reliable garage door service every time.
           </p>
           
           <Button 
@@ -606,10 +408,9 @@ const Index = () => {
             {/* Contact Information */}
             <div className="space-y-6">
               <div className="flex flex-col">
-                <h2 className="text-2xl sm:text-3xl font-bold">
-                  <span className="text-yellow-400">Garage</span>
-                  <span className="text-white">Experts</span>
-                  <span className="text-gray-400 text-sm sm:text-base font-normal ml-1">Inc.</span>
+                <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
+                  <span className="text-yellow-400">BOB</span>
+                  <span className="text-white ml-1">HANDYMAN</span>
                 </h2>
                 <p className="text-sm text-gray-400 mt-1">Professional Garage Door Repair</p>
               </div>
