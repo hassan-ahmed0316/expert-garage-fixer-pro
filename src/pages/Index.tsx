@@ -244,7 +244,7 @@ const Index = () => {
       <section className="py-10 sm:py-16 px-4 bg-white">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-2xl sm:text-4xl font-bold text-center text-black mb-8 sm:mb-12">
-            Why Homeowners Choose Garage Experts Inc.
+            Why Homeowners Choose Bob Handyman
           </h2>
           
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
@@ -521,7 +521,7 @@ const Index = () => {
           {/* Bottom Footer - Now Responsive */}
           <div className="flex flex-col sm:flex-row items-center justify-between pt-4">
             <p className="text-sm text-gray-500 mb-4 sm:mb-0">
-              © 2025 Garage Experts Inc. All rights reserved.
+              © {new Date().getFullYear()} Bob Handyman. All rights reserved.
             </p>
             <div className="flex flex-wrap justify-center gap-6">
               <button onClick={scrollToServingAreas} className="text-sm text-gray-500 hover:text-yellow-400 transition-colors">
