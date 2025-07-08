@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { ChevronDown, Phone, MapPin, Clock, Star, CheckCircle, Wrench, AlertTriangle, ArrowRight } from "lucide-react";
+import { ChevronDown, Phone, MapPin, Clock, Star, CheckCircle, Wrench, AlertTriangle, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
@@ -11,6 +11,50 @@ const Index = () => {
   const servingAreasRef = useRef<HTMLDivElement>(null);
   const { isMobile, isTablet } = useMobile();
   
+  const [testimonials] = useState([
+    {
+      name: "John Smith",
+      location: "Miami, FL",
+      initials: "JS",
+      text: "Bob fixed my garage door quickly and explained everything. I am very happy with the service.",
+    },
+    {
+      name: "Maria Lopez",
+      location: "Chicago, IL",
+      initials: "ML",
+      text: "I called late at night and Bob came right away. He was friendly and got the job done fast.",
+    },
+    {
+      name: "Robert Taylor",
+      location: "Dallas, TX",
+      initials: "RT",
+      text: "Bob installed a new opener for me. The process was smooth and now my garage works perfectly.",
+    },
+    {
+      name: "Emily Chen",
+      location: "Orlando, FL",
+      initials: "EC",
+      text: "Great experience. Bob was on time and fixed the problem without any hassle.",
+    },
+    {
+      name: "David Patel",
+      location: "Phoenix, AZ",
+      initials: "DP",
+      text: "I appreciate how honest and professional Bob was. He did not try to upsell me anything.",
+    },
+    {
+      name: "Sarah Johnson",
+      location: "Boston, MA",
+      initials: "SJ",
+      text: "Bob is very reliable. He answered all my questions and my garage door works like new now.",
+    },
+  ]);
+  const [testimonialIndex, setTestimonialIndex] = useState(0);
+  const testimonialsPerPage = 3;
+  const maxIndex = testimonials.length - testimonialsPerPage;
+  const handlePrev = () => setTestimonialIndex((prev) => Math.max(prev - 1, 0));
+  const handleNext = () => setTestimonialIndex((prev) => Math.min(prev + 1, maxIndex));
+
   useEffect(() => {
     const handleScroll = () => {
       setShowStickyPhone(window.scrollY > 300);
@@ -312,81 +356,48 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {/* Testimonial 1 */}
-            <Card className="border-2 border-gray-200 hover:border-yellow-400 transition-all duration-300 shadow-sm hover:shadow-md">
-              <CardContent className="p-6">
-                <div className="flex items-center mb-4">
-                  <div className="flex text-yellow-400">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-5 w-5 fill-current" />
-                    ))}
-                  </div>
-                </div>
-                <p className="text-gray-700 mb-4 italic">
-                  "Incredible service! My garage door was stuck and they had it fixed in under an hour. The technician was professional and explained everything clearly. Highly recommend!"
-                </p>
-                <div className="flex items-center">
-                  <div className="w-10 h-10 bg-yellow-400 rounded-full flex items-center justify-center text-black font-bold">
-                    JS
-                  </div>
-                  <div className="ml-3">
-                    <p className="font-semibold text-black">John Smith</p>
-                    <p className="text-sm text-gray-600">Miami, FL</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Testimonial 2 */}
-            <Card className="border-2 border-gray-200 hover:border-yellow-400 transition-all duration-300 shadow-sm hover:shadow-md">
-              <CardContent className="p-6">
-                <div className="flex items-center mb-4">
-                  <div className="flex text-yellow-400">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-5 w-5 fill-current" />
-                    ))}
-                  </div>
-                </div>
-                <p className="text-gray-700 mb-4 italic">
-                  "Emergency service at 2 AM! My garage door wouldn't close and they were here within 30 minutes. Fixed the issue and even cleaned up after themselves. Outstanding!"
-                </p>
-                <div className="flex items-center">
-                  <div className="w-10 h-10 bg-yellow-400 rounded-full flex items-center justify-center text-black font-bold">
-                    ML
-                  </div>
-                  <div className="ml-3">
-                    <p className="font-semibold text-black">Maria Lopez</p>
-                    <p className="text-sm text-gray-600">Chicago, IL</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Testimonial 3 */}
-            <Card className="border-2 border-gray-200 hover:border-yellow-400 transition-all duration-300 shadow-sm hover:shadow-md">
-              <CardContent className="p-6">
-                <div className="flex items-center mb-4">
-                  <div className="flex text-yellow-400">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-5 w-5 fill-current" />
-                    ))}
-                  </div>
-                </div>
-                <p className="text-gray-700 mb-4 italic">
-                  "They replaced my old garage door opener with a new smart system. The installation was clean and professional. Now I can control my garage from my phone!"
-                </p>
-                <div className="flex items-center">
-                  <div className="w-10 h-10 bg-yellow-400 rounded-full flex items-center justify-center text-black font-bold">
-                    RT
-                  </div>
-                  <div className="ml-3">
-                    <p className="font-semibold text-black">Robert Taylor</p>
-                    <p className="text-sm text-gray-600">Dallas, TX</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+          <div className="relative">
+            <button
+              onClick={handlePrev}
+              disabled={testimonialIndex === 0}
+              className={`absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white border border-gray-200 rounded-full p-2 shadow-md hover:bg-yellow-400 hover:text-black transition-colors disabled:opacity-40 disabled:cursor-not-allowed hidden sm:block`}
+              aria-label="Previous testimonials"
+            >
+              <ChevronLeft className="h-6 w-6" />
+            </button>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+              {testimonials.slice(testimonialIndex, testimonialIndex + testimonialsPerPage).map((t, i) => (
+                <Card key={i + testimonialIndex} className="border-2 border-gray-200 hover:border-yellow-400 transition-all duration-300 shadow-sm hover:shadow-md">
+                  <CardContent className="p-6">
+                    <div className="flex items-center mb-4">
+                      <div className="flex text-yellow-400">
+                        {[...Array(5)].map((_, j) => (
+                          <Star key={j} className="h-5 w-5 fill-current" />
+                        ))}
+                      </div>
+                    </div>
+                    <p className="text-gray-700 mb-4 italic">{t.text}</p>
+                    <div className="flex items-center">
+                      <div className="w-10 h-10 bg-yellow-400 rounded-full flex items-center justify-center text-black font-bold">
+                        {t.initials}
+                      </div>
+                      <div className="ml-3">
+                        <p className="font-semibold text-black">{t.name}</p>
+                        <p className="text-sm text-gray-600">{t.location}</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+            <button
+              onClick={handleNext}
+              disabled={testimonialIndex >= maxIndex}
+              className={`absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white border border-gray-200 rounded-full p-2 shadow-md hover:bg-yellow-400 hover:text-black transition-colors disabled:opacity-40 disabled:cursor-not-allowed hidden sm:block`}
+              aria-label="Next testimonials"
+            >
+              <ChevronRight className="h-6 w-6" />
+            </button>
           </div>
 
           <div className="text-center mt-8 sm:mt-12">
