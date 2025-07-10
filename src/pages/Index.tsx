@@ -281,6 +281,47 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Before & After Gallery Section */}
+      <section className="py-10 sm:py-16 px-4 bg-white">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl sm:text-4xl font-bold text-black mb-3">Before & After Gallery</h2>
+            <p className="text-lg sm:text-xl text-gray-700 max-w-2xl mx-auto">
+              We fix garage doors fast with real results you can trust.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="bg-white rounded-lg shadow-lg p-4 flex flex-col items-center border border-gray-200 hover:shadow-xl transition-shadow">
+              <div className="relative w-full mb-3 aspect-[4/3]">
+                <img src="/images/image1.jpg" alt="Garage door opener repair service in Maryland, showcasing tools and equipment for efficient repairs." className="rounded-lg w-full h-full object-cover" />
+                <div className="absolute bottom-2 right-2 bg-black/60 text-white text-xs sm:text-sm px-3 py-1 rounded shadow-lg font-semibold tracking-wide select-none pointer-events-none">
+                  Before / After
+                </div>
+              </div>
+              <span className="font-semibold text-gray-800 text-center">Opener Repair – Maryland</span>
+            </div>
+            <div className="bg-white rounded-lg shadow-lg p-4 flex flex-col items-center border border-gray-200 hover:shadow-xl transition-shadow">
+              <div className="relative w-full mb-3 aspect-[4/3]">
+                <img src="/images/image2.jpg" alt="Garage door opener repair service in San Diego, showcasing tools and equipment for efficient repairs." className="rounded-lg w-full h-full object-cover" />
+                <div className="absolute bottom-2 right-2 bg-black/60 text-white text-xs sm:text-sm px-3 py-1 rounded shadow-lg font-semibold tracking-wide select-none pointer-events-none">
+                  Before / After
+                </div>
+              </div>
+              <span className="font-semibold text-gray-800 text-center">Opener Repair – San Diego</span>
+            </div>
+            <div className="bg-white rounded-lg shadow-lg p-4 flex flex-col items-center border border-gray-200 hover:shadow-xl transition-shadow">
+              <div className="relative w-full mb-3 aspect-[4/3]">
+                <img src="/images/image3.jpg" alt="Visual of a garage door being replaced, highlighting the process and tools used for repair and installation." className="rounded-lg w-full h-full object-cover" />
+                <div className="absolute bottom-2 right-2 bg-black/60 text-white text-xs sm:text-sm px-3 py-1 rounded shadow-lg font-semibold tracking-wide select-none pointer-events-none">
+                  Before / After
+                </div>
+              </div>
+              <span className="font-semibold text-gray-800 text-center">Garage Door Replacement</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Why Choose Us - Now Responsive */}
       <section className="py-10 sm:py-16 px-4 bg-white">
         <div className="max-w-6xl mx-auto">
@@ -725,7 +766,7 @@ const Index = () => {
           {/* Bottom Footer - Now Responsive */}
           <div className="flex flex-col sm:flex-row items-center justify-between pt-4">
             <p className="text-sm text-gray-500 mb-4 sm:mb-0">
-              © 2025 Garage Experts Inc. All rights reserved.
+              © {new Date().getFullYear()} Bob Handyman. All rights reserved.
             </p>
             <div className="flex flex-wrap justify-center gap-6">
               <button 
