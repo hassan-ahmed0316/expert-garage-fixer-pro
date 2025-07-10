@@ -298,7 +298,7 @@ const Index = () => {
                   Before / After
                 </div>
               </div>
-              <span className="font-semibold text-gray-800 text-center">Opener Repair – Maryland</span>
+              <span className="font-semibold text-gray-800 text-center">Opener Repair Maryland</span>
             </div>
             <div className="bg-white rounded-lg shadow-lg p-4 flex flex-col items-center border border-gray-200 hover:shadow-xl transition-shadow">
               <div className="relative w-full mb-3 aspect-[4/3]">
@@ -307,7 +307,7 @@ const Index = () => {
                   Before / After
                 </div>
               </div>
-              <span className="font-semibold text-gray-800 text-center">Opener Repair – San Diego</span>
+              <span className="font-semibold text-gray-800 text-center">Opener Repair San Diego</span>
             </div>
             <div className="bg-white rounded-lg shadow-lg p-4 flex flex-col items-center border border-gray-200 hover:shadow-xl transition-shadow">
               <div className="relative w-full mb-3 aspect-[4/3]">
@@ -316,7 +316,7 @@ const Index = () => {
                   Before / After
                 </div>
               </div>
-              <span className="font-semibold text-gray-800 text-center">Garage Door Replacement</span>
+              <span className="font-semibold text-gray-800 text-center">Garage Door Off Track</span>
             </div>
           </div>
         </div>
