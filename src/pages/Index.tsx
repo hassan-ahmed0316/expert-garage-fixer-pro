@@ -32,7 +32,7 @@ const Index = () => {
     }
   };
 
-  const phoneNumber = "(954) 539-6734";
+  const phoneNumber = "(951) 379-4799";
 
   const garageIssues = [
     {
